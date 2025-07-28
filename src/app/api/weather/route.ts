@@ -46,9 +46,9 @@ export async function GET(request: NextRequest) {
         iconUrl: `https://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png`
       },
       forecast: forecastData.list
-        .filter((_: any, index: number) => index % 8 === 0)
+        .filter((_: unknown, index: number) => index % 8 === 0)
         .slice(0, 5)
-        .map((item: any) => ({
+        .map((item: { dt: number; main: { temp_min: number; temp_max: number }; weather: { icon: string }[] }) => ({
           date: new Date(item.dt * 1000).toLocaleDateString(),
           minTemp: Math.round(item.main.temp_min),
           maxTemp: Math.round(item.main.temp_max),
